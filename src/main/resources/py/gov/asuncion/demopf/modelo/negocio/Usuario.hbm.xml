@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 18/11/2016 11:08:05 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="py.gov.asuncion.demopf.modelo.negocio.Usuario" table="usuario" schema="public" optimistic-lock="version">
+    <class name="py.gov.asuncion.demopf.modelo.negocio.Usuario" table="usuario" schema="public" optimistic-lock="version" lazy="false">
         <id name="id" type="int">
             <column name="id" />
             <generator class="assigned" />
@@ -26,7 +26,7 @@
         <property name="apellidoMaterno" type="string">
             <column name="apellido_materno" length="60" />
         </property>
-        <property name="edad" type="int">
+        <property name="edad" type="short">
             <column name="edad" not-null="true" />
         </property>
         <property name="correo" type="string">

@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 18/11/2016 11:08:05 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="py.gov.asuncion.demopf.modelo.negocio.Rol" table="rol" schema="public" optimistic-lock="version">
+    <class name="py.gov.asuncion.demopf.modelo.negocio.Rol" table="rol" schema="public" optimistic-lock="version" lazy="false">
         <id name="id" type="int">
             <column name="id" />
             <generator class="assigned" />

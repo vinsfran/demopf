@@ -13,14 +13,18 @@
         <param-value>/WEB-INF/applicationContext.xml</param-value>
     </context-param>
     <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
     </listener>
     <listener>
-        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+        <listener-class>
+            org.springframework.web.context.request.RequestContextListener
+        </listener-class>
     </listener>
-<!--    <listener>
-        <listener-class>com.sun.faces.config.ContextLoaderListener</listener-class>
-    </listener>-->
+    <listener>
+        <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
+    </listener>
     
     <!-- JSF -->
     
@@ -37,5 +41,10 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
+    
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>bootstrap</param-value>
+    </context-param>
 
 </web-app>
