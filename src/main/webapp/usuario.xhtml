@@ -72,7 +72,7 @@
                     <p:message for="rol"/>
 
                 </p:panelGrid>
-
+                <br/>
                 <p:commandButton value="Guardar" actionListener="#{usuario.guardar()}" update="@form, tbl">
                     <p:confirm header="Confirmación" message="Desea guardar el registro?" icon="ui-icon-alert" />
                 </p:commandButton>
@@ -100,7 +100,7 @@
                              widgetVar="tbl">
 
                     <f:facet name="header">Usuarios registrados</f:facet>
-                    
+
                     <p:column headerText="ID" style="text-align: center;" filterBy="#{u.id}" filterMatchMode="exact">
                         <h:outputText value="#{u.id}"/>
                     </p:column>
