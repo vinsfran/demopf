@@ -51,4 +51,30 @@ public class Rol implements java.io.Serializable {
         this.usuarios = usuarios;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 79 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Rol other = (Rol) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
+    
+   
 }

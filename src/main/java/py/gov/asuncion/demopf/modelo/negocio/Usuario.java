@@ -101,7 +101,7 @@ public class Usuario implements java.io.Serializable {
         this.apellidoMaterno = apellidoMaterno;
     }
 
-    public int getEdad() {
+    public short getEdad() {
         return this.edad;
     }
 
