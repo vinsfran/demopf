@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import py.gov.asuncion.demopf.modelo.negocio.Rol;
 import py.gov.asuncion.demopf.modelo.negocio.Usuario;
 
@@ -42,6 +43,67 @@ public class DemopfDAOImp implements DemopfDAO, Serializable {
 
     }
 
+    @Override
+    public void guardarUsuario(Usuario usuario) {
+        Session session = null;
+        Transaction tx = null;
+        try {
+            session = sessionFactory.openSession();
+            tx = session.beginTransaction();
+            session.persist(usuario);
+            tx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            tx.rollback();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+                session = null;
+            }
+        }
+    }
+
+    @Override
+    public void actualizarUsuario(Usuario usuario) {
+        Session session = null;
+        Transaction tx = null;
+        try {
+            session = sessionFactory.openSession();
+            tx = session.beginTransaction();
+            session.update(usuario);
+            tx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            tx.rollback();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+                session = null;
+            }
+        }
+    }
+
+    @Override
+    public void eliminarUsuario(Usuario usuario) {
+        Session session = null;
+        Transaction tx = null;
+        try {
+            session = sessionFactory.openSession();
+            tx = session.beginTransaction();
+            Usuario u = session.load(Usuario.class, usuario.getId());
+            session.delete(u);
+            tx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            tx.rollback();
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+                session = null;
+            }
+        }
+    }
+
     @SuppressWarnings("unchecked")
     @Override
     public List<Rol> obtenerRoles() {
@@ -60,6 +122,24 @@ public class DemopfDAOImp implements DemopfDAO, Serializable {
             }
         }
 
+    }
+
+    @Override
+    public Rol obtenerRolXId(int id) {
+        Session session = null;
+
+        try {
+            session = sessionFactory.openSession();
+            return (Rol) session.createQuery("FROM Rol WHERE id = :id").setParameter("id", id).getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+                session = null;
+            }
+        }
     }
 
     public void setSessionFactory(SessionFactory sessionFactory) {

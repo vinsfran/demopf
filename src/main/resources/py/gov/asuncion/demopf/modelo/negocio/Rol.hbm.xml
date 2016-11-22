@@ -6,7 +6,7 @@
     <class name="py.gov.asuncion.demopf.modelo.negocio.Rol" table="rol" schema="public" optimistic-lock="version" lazy="false">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="descripcion" type="string">
             <column name="descripcion" length="20" not-null="true" />

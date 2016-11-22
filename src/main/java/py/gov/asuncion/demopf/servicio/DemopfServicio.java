@@ -17,8 +17,16 @@ public interface DemopfServicio {
 
     //Usuario
     public List<Usuario> obtenerUsuarios();
+    
+    public void guardarUsuario(Usuario usuario);
+    
+    public void actualizarUsuario(Usuario usuario);
+    
+    public void eliminarUsuario(Usuario usuario);
 
     //Rol
     public List<Rol> obtenerRoles();
+
+    public Rol obtenerRolXId(int id);
 
 }

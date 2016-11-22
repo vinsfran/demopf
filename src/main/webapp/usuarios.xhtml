@@ -2,38 +2,119 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>demopf - Usuarios</title>
     </h:head>
     <h:body>
-        <p:dataTable value="#{usuario.usuarios}"
-                     var="u"
-                     emptyMessage="Sin registros">
-            
-            <p:column headerText="ID" style="text-align: center;">
-                <h:outputText value="#{u.id}"/>
-            </p:column>
-            
-            <p:column headerText="Nombre" style="text-align: center;">
-                <h:outputText value="#{u.nombre} #{u.apellidoPaterno} #{u.apellidoMaterno}"/>
-            </p:column>
-            
-            <p:column headerText="Edad" style="text-align: center;">
-                <h:outputText value="#{u.edad}"/>
-            </p:column>
-            
-            <p:column headerText="Carreo" style="text-align: center;">
-                <h:outputText value="#{u.correo}"/>
-            </p:column>
-            
-            <p:column headerText="Rol" style="text-align: center;">
-                <h:outputText value="#{u.rol.descripcion}"/>
-            </p:column>
-            
-        </p:dataTable>
-        
-        <p:commandButton actionListener="#" value="Aceptar"/>
+        <p:growl id="growl" showDetail="true" showSummary="true" autoUpdate="true" life="6000" escape="false" />
+        <h:form id="fromUsuarios">
+            <p:panel header="Administración de Usuarios">
+                <br/>
+                <p:panelGrid columns="3" id="panelDU">
+                    <f:facet name="header">Datos del Usuario</f:facet>
+
+                    <p:outputLabel value="Nombre" for="nombre"/>
+                    <p:inputText id="nombre" value="#{usuario.usuario.nombre}" required="true" requiredMessage="Debe ingresar un Nombre"/>
+                    <p:message for="nombre"/>
+
+                    <p:outputLabel value="Apellido Paterno" for="apePat"/>
+                    <p:inputText id="apePat" value="#{usuario.usuario.apellidoPaterno}" required="true" requiredMessage="Debe ingresar un Apellido Paterno"/>
+                    <p:message for="apePat"/>
+
+                    <p:outputLabel value="Apellido Materno" for="apeMat"/>
+                    <p:inputText id="apeMat" value="#{usuario.usuario.apellidoMaterno}"/>
+                    <p:message for="apeMat"/>
+
+                    <p:outputLabel value="Edad" for="edad"/>
+                    <p:inputText id="edad" value="#{usuario.usuario.edad}"/>
+                    <p:message for="edad"/>
+
+                    <p:outputLabel value="Dirección" for="direccion"/>
+                    <p:inputText id="direccion" value="#{usuario.usuario.direccion}"/>
+                    <p:message for="direccion"/>
+
+                    <p:outputLabel value="Correo" for="correo"/>
+                    <p:inputText id="correo" value="#{usuario.usuario.correo}"/>
+                    <p:message for="correo"/>
+                </p:panelGrid>
+
+                <br/>
+                <p:panelGrid columns="3" id="panelDCU">
+                    <f:facet name="header">Datos de la Cuenta del Usuario</f:facet>
+
+                    <p:outputLabel value="Usuario" for="usuario"/>
+                    <p:inputText id="usuario" value="#{usuario.usuario.usuario}"/>
+                    <p:message for="usuario"/>
+
+                    <p:outputLabel value="Contraseña" for="pass1"/>
+                    <p:password id="pass1" value="#{usuario.usuario.contrasenia}" match="pass2" feedback="true" redisplay="true" 
+                                strongLabel="Contraseña Fuerte"
+                                goodLabel="Contraseña Buena"
+                                weakLabel="Contraseña Debil"
+                                label="Ingresa una contraseña"/>
+                    <p:message for="pass1"/>
+
+                    <p:outputLabel value="Repetir Contraseña" for="pass2"/>
+                    <p:password id="pass2" value="#{usuario.usuario.contrasenia}" feedback="true" redisplay="true"
+                                strongLabel="Contraseña Fuerte"
+                                goodLabel="Contraseña Buena"
+                                weakLabel="Contraseña Debil"/>
+                    <p:message for="pass2"/>
+
+                    <p:outputLabel value="Rol" for="rol"/>
+                    <p:selectOneMenu id="rol" value="#{usuario.usuario.rol}" converter="#{rolConverter}">
+                        <f:selectItem itemLabel="Elegir..." itemValue="#{null}" noSelectionOption="true"/>
+                        <f:selectItems value="#{usuario.roles}" var="r" itemLabel="#{r.descripcion}" itemValue="#{r}"/>
+                    </p:selectOneMenu>
+                    <p:message for="rol"/>
+
+                </p:panelGrid>
+
+                <p:commandButton value="Aceptar" actionListener="#{usuario.guardar()}" update="@form, tbl"/>
+                <p:commandButton value="Cancelar" actionListener="#{usuario.cancelar()}"/>
+                <br/>
+                <br/>
+
+                <p:contextMenu for="tbl">
+                    <p:menuitem value="Editar" update="panelDU panelDCU" icon="ui-icon-search" actionListener="#{usuario.actualizar()}" process="tbl @this"/>
+                    <p:menuitem value="Eliminar" update="tbl" icon="ui-icon-close" actionListener="#{usuario.eliminar()}" process="tbl @this"/>
+                </p:contextMenu>
+                
+                <p:dataTable id="tbl"
+                             value="#{usuario.usuarios}"
+                             var="u"
+                             emptyMessage="Sin registros"
+                             selection="#{usuario.slcUsuario}"
+                             selectionMode="single"
+                             rowKey="#{u.id}">
+
+                    <p:column headerText="ID" style="text-align: center;">
+                        <h:outputText value="#{u.id}"/>
+                    </p:column>
+
+                    <p:column headerText="Nombre" style="text-align: center;">
+                        <h:outputText value="#{u.nombre} #{u.apellidoPaterno} #{u.apellidoMaterno}"/>
+                    </p:column>
+
+                    <p:column headerText="Edad" style="text-align: center;">
+                        <h:outputText value="#{u.edad}"/>
+                    </p:column>
+
+                    <p:column headerText="Correo" style="text-align: center;">
+                        <h:outputText value="#{u.correo}"/>
+                    </p:column>
+
+                    <p:column headerText="Rol" style="text-align: center;">
+                        <h:outputText value="#{u.rol.descripcion}"/>
+                    </p:column>
+
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+
     </h:body>
 </html>
 

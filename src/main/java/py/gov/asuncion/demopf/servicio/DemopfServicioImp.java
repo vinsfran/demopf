@@ -17,8 +17,8 @@ import py.gov.asuncion.demopf.modelo.dao.DemopfDAO;
  * @author vinsfran
  */
 @Transactional(readOnly = true)
-public class DemopfServicioImp implements DemopfServicio, Serializable{
-    
+public class DemopfServicioImp implements DemopfServicio, Serializable {
+
     private static final long serialVersionID = 1L;
     private DemopfDAO demopfDAO;
 
@@ -26,16 +26,37 @@ public class DemopfServicioImp implements DemopfServicio, Serializable{
     public List<Usuario> obtenerUsuarios() {
         return demopfDAO.obtenerUsuarios();
     }
+    
+    @Transactional(readOnly = false)
+    @Override
+    public void guardarUsuario(Usuario usuario){
+       demopfDAO.guardarUsuario(usuario);
+    }
+    
+    @Transactional(readOnly = false)
+    @Override
+    public void actualizarUsuario(Usuario usuario){
+       demopfDAO.actualizarUsuario(usuario);
+    }
+    
+    @Transactional(readOnly = false)
+    @Override
+    public void eliminarUsuario(Usuario usuario){
+       demopfDAO.eliminarUsuario(usuario);
+    }
 
     @Override
     public List<Rol> obtenerRoles() {
         return demopfDAO.obtenerRoles();
     }
 
+    @Override
+    public Rol obtenerRolXId(int id) {
+        return demopfDAO.obtenerRolXId(id);
+    }
+
     public void setDemopfDAO(DemopfDAO demopfDAO) {
         this.demopfDAO = demopfDAO;
     }
 
-   
-    
 }
