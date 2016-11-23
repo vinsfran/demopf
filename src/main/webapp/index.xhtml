@@ -2,13 +2,46 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>demopf - Acceso</title>
     </h:head>
     <h:body>
         <h:outputText value="Hola JSF!!!" />
-        <p:outputLabel value="Hola Primefaces"/>
+        <h:form>
+            <h:outputText value="Tipo de Reporte: " />
+
+            <p:selectOneMenu value="#{reporte.tipoReporte}">
+                <f:selectItem itemLabel="Elegir" itemValue="vacio"/>
+                <f:selectItem itemLabel="PDF" itemValue="pdf"/>
+                <f:selectItem itemLabel="Excel" itemValue="xlsx"/>
+                <f:selectItem itemLabel="Word" itemValue="docx"/>
+                <f:selectItem itemLabel="Power Point" itemValue="pptx"/>
+                <f:selectItem itemLabel="CSV" itemValue="csv"/>
+                <f:selectItem itemLabel="Texto" itemValue="txt"/>
+                
+            </p:selectOneMenu>
+            <br/>
+            <br/>
+            <h:commandLink id="reporteCompleto"
+                           target="_black"
+                           value="Reporte Completo" 
+                           actionListener="#{reporte.verReporteUsuariosCompleto()}" 
+                           title="Ver reporte de Usuarios"/>
+            <br/>
+            <br/>
+            <p:selectOneMenu value="#{reporte.idRol}">
+                <f:selectItem itemLabel="Elegir" itemValue="#{null}" noSelectionOption="true"/>
+                <f:selectItems value="#{reporte.roles}" var="rl" itemLabel="#{rl.descripcion}" itemValue="#{rl.id}"/>
+            </p:selectOneMenu>
+            <br/>
+            <h:commandLink id="reporteRol"
+                           target="_black"
+                           value="Reporte por Rol" 
+                           actionListener="#{reporte.verReporteUsuariosPorRol()}" 
+                           title="Ver reporte de Usuarios por Rol"/>
+        </h:form>
     </h:body>
 </html>
 
