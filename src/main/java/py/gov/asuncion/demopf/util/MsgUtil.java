@@ -14,28 +14,28 @@ import javax.faces.context.FacesContext;
  */
 public class MsgUtil {
 
-    private static FacesMessage message;
+    private static FacesMessage msg;
 
     public static void msg(String resumen, String detalle, String tipo) {
         switch (tipo) {
             case "INFO":
-                message = new FacesMessage(FacesMessage.SEVERITY_INFO, resumen, detalle);
+                msg = new FacesMessage(FacesMessage.SEVERITY_INFO, resumen, detalle);
                 break;
             case "WARNING":
-                message = new FacesMessage(FacesMessage.SEVERITY_WARN, resumen, detalle);
+                msg = new FacesMessage(FacesMessage.SEVERITY_WARN, resumen, detalle);
                 break;
             case "ERROR":
-                message = new FacesMessage(FacesMessage.SEVERITY_ERROR, resumen, detalle);
+                msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, resumen, detalle);
                 break;
             default:
-                message = new FacesMessage(FacesMessage.SEVERITY_FATAL, resumen, detalle);
+                msg = new FacesMessage(FacesMessage.SEVERITY_FATAL, resumen, detalle);
                 break;
         }
         msgFacesMessage();
     }
 
     private static void msgFacesMessage() {
-        FacesContext.getCurrentInstance().addMessage(null, message);
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 
 }
