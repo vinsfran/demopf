@@ -35,5 +35,10 @@
         <property name="direccion" type="string">
             <column name="direccion" length="150" not-null="true" />
         </property>
+        
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="150"/>
+        </property>
+        
     </class>
 </hibernate-mapping>

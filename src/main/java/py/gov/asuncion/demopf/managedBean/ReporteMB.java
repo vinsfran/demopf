@@ -16,7 +16,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.servlet.ServletContext;
 import py.gov.asuncion.demopf.modelo.negocio.Rol;
-import py.gov.asuncion.demopf.reporte.Reportes;
+import py.gov.asuncion.demopf.reportes.Reportes;
 import py.gov.asuncion.demopf.servicio.DemopfServicio;
 
 /**

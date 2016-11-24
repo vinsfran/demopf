@@ -16,6 +16,7 @@ public class Usuario implements java.io.Serializable {
     private short edad;
     private String correo;
     private String direccion;
+     private String descripcion;
 
     public Usuario() {
     }
@@ -32,7 +33,7 @@ public class Usuario implements java.io.Serializable {
         this.direccion = direccion;
     }
 
-    public Usuario(int id, Rol rol, String usuario, String contrasenia, String nombre, String apellidoPaterno, String apellidoMaterno, short edad, String correo, String direccion) {
+    public Usuario(int id, Rol rol, String usuario, String contrasenia, String nombre, String apellidoPaterno, String apellidoMaterno, short edad, String correo, String direccion, String descripcion) {
         this.id = id;
         this.rol = rol;
         this.usuario = usuario;
@@ -43,6 +44,7 @@ public class Usuario implements java.io.Serializable {
         this.edad = edad;
         this.correo = correo;
         this.direccion = direccion;
+        this.descripcion = descripcion;
     }
 
     public int getId() {
@@ -123,6 +125,20 @@ public class Usuario implements java.io.Serializable {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    /**
+     * @return the descripcion
+     */
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    /**
+     * @param descripcion the descripcion to set
+     */
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
 }

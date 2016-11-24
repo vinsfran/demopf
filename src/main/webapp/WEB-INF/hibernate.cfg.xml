@@ -2,14 +2,19 @@
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
+        <!-- Esta propiedad establece el lenguaje de la base de datos-->
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        
         <property name="hibernate.current_session_context_class">thread</property>
-    
-<!--        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <!--        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/demopf_db</property>
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">admin123</property>-->
-    
+        
+        <!-- Sirve para desactivar el debug de las consultas en la consola. -->
+        <property name="hibernate.show_sql">true</property>
+        <!-- Esta propiedad establece que solo se actualiza una tabla cuando haya cambios -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
         <!-- Mapas de los pojos -->
         <mapping resource="py/gov/asuncion/demopf/modelo/negocio/Rol.hbm.xml"/>
         <mapping resource="py/gov/asuncion/demopf/modelo/negocio/Usuario.hbm.xml"/>
